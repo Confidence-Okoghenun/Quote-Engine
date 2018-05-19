@@ -45,8 +45,8 @@ let quotes = {
   },
   
   q9: {
-    quote : "To be a champion, you have to believe in yourself when nobody else will.",
-    name : "Sugar Ray Robinson"
+    quote : "Success is the prize for those who stand true to their ideas",
+    name : "John S. Hinds"
   },
   
   q10: {
@@ -115,8 +115,8 @@ let quotes = {
   },
   
   q23: {
-    quote : "The achievement of one goal should be the starting point of another.",
-    name : "Alexander Graham Bel"
+    quote : "You may be disappointed if you fail, but you are doomed if you do not try.",
+    name : "Beverly Sills"
   },
   
   q24: {
@@ -137,37 +137,36 @@ function randomizer() {
 }
 
 function fadeOut() {
-  let element = document.querySelectorAll(".content");
-  if(element.length > 1) {
-    for(let i = element.length-1; i > 0; i--){
-      element[i].remove();
-    }
-  }
-  else {
+  let element = document.querySelector("#main-content");
     let fadeEffect = setInterval(function() {
-      if (!element[0].style.opacity) {
-        element[0].style.opacity = 1;
-      } if (element[0].style.opacity < 0.1) {
+      if (!element.style.opacity) {
+        element.style.opacity = 1;
+      } if (element.style.opacity < 0.1) {
         clearInterval(fadeEffect);
-        element[0].remove();
+        element.style.opacity= 1;
+          document.querySelector("#content").remove();
+          createQuote();
+          randStyle();
       } else {
-        element[0].style.opacity -= 0.1;
-      }
-    }, 50);
-  }
+        element.style.opacity -= 0.1;
+      } 
+    }, 40);
+  
 }
 
 function randStyle() {
   let randz = Math.floor(Math.random()*9);
   let style = "s"+randz;
-  return style;
+  document.querySelector("body").setAttribute("class", style);
+  document.querySelector("button").style.background = window.getComputedStyle(document.querySelector("body"), null).color;
+  document.querySelector("button").style.color = 'white';
 }
 
 function createQuote() {
   let randNum = randomizer();
   let mainContentDiv = document.querySelector("#main-content");
   let contentDiv = document.createElement("div");
-  contentDiv.setAttribute("class", "content");
+  contentDiv.setAttribute("id", "content");
   
   let quoteText = document.createElement("p");
   quoteText.setAttribute("id", "quote-text");
@@ -180,13 +179,12 @@ function createQuote() {
   contentDiv.appendChild(quoteText);
   quoteText.appendChild(quoteName);
   mainContentDiv.appendChild( contentDiv);
-
-  document.querySelector("body").setAttribute("class", randStyle());
+  randStyle();
 }
 
-function postTweet() {
+document.querySelector("#tweet-quote").addEventListener("click",() => {
   this.setAttribute('href', 'https://twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text=' + encodeURIComponent('"' + document.querySelector("#quote-text").textContent + '" ' + document.querySelector("#quote-name").textContent));
-}
+});
 
 function textWrite() {
   let elements = document.getElementsByClassName('txt-rotate');
@@ -212,11 +210,6 @@ let TxtRotate = function(el, toRotate, period) {
   this.tick();
   this.isDeleting = false;
 };
-
-createQuote();
-
-
-document.querySelector("#tweet-quote").addEventListener("click", postTweet);
 
 TxtRotate.prototype.tick = function() {
   let i = this.loopNum % this.toRotate.length;
@@ -250,15 +243,9 @@ TxtRotate.prototype.tick = function() {
 };
 
 document.querySelector("button").addEventListener("click", function() {
-  // let element = document.querySelectorAll(".content");
-  // if(element.length > 1) {
-  //   for(let i = element.length-1; i > 0; i--){
-  //     element[i].remove();
-  //   }
-  // } else {
-  //   element[0].remove();
-  // }
   fadeOut();
-  createQuote();
 });
+
+createQuote();
+
 textWrite();
