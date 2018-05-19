@@ -3,10 +3,26 @@
   <head>
     <title>Random Quotes</title>
     <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:200,100,400" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9"
+  crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/style.css">
   </head>
   <body>
-    <div id="container"></div>
+    <div id="container">
+      <div id="main-content"></div>
+      
+      <div>
+      <a id="tweet-quote" title="Tweet this quote!" target="_blank">
+        <i class="fab fa-twitter-square"></i>
+      </a>
+      <span id="text">
+        This quote
+        <span class="txt-rotate" data-period="2000" data-rotate='[ "inspires.", "is lovely.", "should be tweeted.", "motivates.", "is fun!" ]'></span>
+      </span>
+      <button>Next</button>
+      </div>
+    </div>
     <script src="js/main.js"></script>
   </body>
 </html>
